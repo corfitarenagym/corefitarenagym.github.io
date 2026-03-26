@@ -1,1 +1,66 @@
-Digital world clock application
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Clock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .clock {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin: 5px;
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>World Clock</h1>
+    <div id="clocks"></div>
+
+    <script>
+        const cities = [
+            { name: 'New York', timeZone: 'America/New_York' },
+            { name: 'London', timeZone: 'Europe/London' },
+            { name: 'Tokyo', timeZone: 'Asia/Tokyo' },
+            { name: 'Sydney', timeZone: 'Australia/Sydney' },
+            { name: 'Paris', timeZone: 'Europe/Paris' },
+            { name: 'Cairo', timeZone: 'Africa/Cairo' },
+            { name: 'Moscow', timeZone: 'Europe/Moscow' },
+            { name: 'Rio de Janeiro', timeZone: 'America/Sao_Paulo' },
+            { name: 'Delhi', timeZone: 'Asia/Kolkata' },
+            { name: 'Los Angeles', timeZone: 'America/Los_Angeles' },
+            { name: 'Cape Town', timeZone: 'Africa/Johannesburg' },
+            { name: 'Bangkok', timeZone: 'Asia/Bangkok' }
+        ];
+
+        const updateClocks = () => {
+            const clocksDiv = document.getElementById('clocks');
+            clocksDiv.innerHTML = '';
+            cities.forEach(city => {
+                const date = new Date().toLocaleString('en-US', { timeZone: city.timeZone });
+                const clockDiv = document.createElement('div');
+                clockDiv.className = 'clock';
+                clockDiv.innerHTML = `<strong>${city.name}</strong>: ${date}`;
+                clocksDiv.appendChild(clockDiv);
+            });
+        };
+
+        setInterval(updateClocks, 1000);
+        updateClocks();
+    </script>
+</body>
+</html>
